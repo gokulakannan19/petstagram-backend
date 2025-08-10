@@ -13,14 +13,15 @@ class Settings:
     DEBUG: bool = os.getenv("DEBUG", "False").lower() in ("true", "1")
 
     # Database settings
-    DB_HOST: str = os.getenv("DB_HOST", "localhost")
-    DB_PORT: int = int(os.getenv("DB_PORT", 5432))
-    DB_USER: str = os.getenv("DB_USER", "user")
-    DB_PASSWORD: str = os.getenv("DB_PASSWORD", "password")
-    DB_NAME: str = os.getenv("DB_NAME", "mydatabase")
+    DATABASE_URL: str = os.getenv("DATABASE_URL", "postgresql://user:password@localhost/mydatabase")
+    # DB_HOST: str = os.getenv("DB_HOST", "localhost")
+    # DB_PORT: int = int(os.getenv("DB_PORT", 5432))
+    # DB_USER: str = os.getenv("DB_USER", "user")
+    # DB_PASSWORD: str = os.getenv("DB_PASSWORD", "password")
+    # DB_NAME: str = os.getenv("DB_NAME", "mydatabase")
 
-    # Logging settings
-    LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
+    # # Logging settings
+    # LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
 
 
 settings = Settings()

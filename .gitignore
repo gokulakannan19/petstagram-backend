@@ -90,3 +90,5 @@ instance/
 *.db
 *.sqlite3
 alembic/
+
+.env
