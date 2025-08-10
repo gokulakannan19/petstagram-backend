@@ -20,6 +20,10 @@ class Settings:
     # DB_PASSWORD: str = os.getenv("DB_PASSWORD", "password")
     # DB_NAME: str = os.getenv("DB_NAME", "mydatabase")
 
+    #JWT Settings
+    JWT_SECRET_KEY: str = os.getenv("JWT_SECRET_KEY")
+    JWT_ALGORITHM: str = os.getenv("JWT_ALGORITHM", "HS256")
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
     # # Logging settings
     # LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
 
