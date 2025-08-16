@@ -9,6 +9,7 @@ from passlib.context import CryptContext
 from ..config import settings
 from ..database import database_dependency
 from ..models import User
+from ..schemas import Token
 
 
 router = APIRouter(
@@ -59,3 +60,18 @@ def get_current_user(db: database_dependency, token: str = Depends(oauth2_scheme
     if user is None:
         raise credentials_exception
     return user
+
+
+# -------------------- AUTH Routers -------------------------
+@router.post("/login", response_model=Token)
+def login(db: database_dependency, form_data: OAuth2PasswordRequestForm = Depends()):
+    user = db.query(User).filter(User.username == form_data.username)
+    if not user or not verify_password(form_data.password, user.hashed_password):
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+    
+    access_token = create_access_token(
+        data={"sub": str(user.id)},
+        expires_delta=settings.ACCESS_TOKEN_EXPIRE_MINUTES
+    )
+
+    return {"access_token": access_token, "token_type": "bearer"}
