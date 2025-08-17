@@ -19,4 +19,4 @@ def get_db():
         db.close()
 
     
-database_dependency = Annotated[Session, Depends(get_db())]
+database_dependency = Annotated[Session, Depends(get_db)]
